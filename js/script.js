@@ -104,19 +104,23 @@ window.addEventListener('DOMContentLoaded', () => {
           modalCloseBtn = document.querySelector('[data-close]'),
           modal = document.querySelector('.modal');
     
-    modalTrigger.forEach(btn => {
-        btn.addEventListener('click', () => {
+    function openModal() {
             modal.classList.add('show');
             modal.classList.remove('hide');
             document.body.style.overflow = 'hidden';// Щоб не скролилась сторінка
+            clearInterval(modalTimerId);
+        }
+    
+    modalTrigger.forEach(btn => {
+            btn.addEventListener('click', openModal);
         });
-    });
     function closeModal() {
             modal.classList.add('hide');
             modal.classList.remove('show');
             document.body.style.overflow = '';
-    }
-     modalCloseBtn.addEventListener('click', closeModal);
+        }
+    modalCloseBtn.addEventListener('click', closeModal);
+    
     // Щоб вікно закривалось якшо клацати мимо нього
     modal.addEventListener('click', (e) => {
         if (e.target == modal) {
@@ -129,5 +133,14 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
-    
+    const modalTimerId = setTimeout(openModal, 5000);
+
+    //Якщо доскролити сторінку до кінця відкриється вікно
+    function showModalByScroll() {
+          if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+              openModal();
+              window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+    window.addEventListener('scroll', showModalByScroll);
 });

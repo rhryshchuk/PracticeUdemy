@@ -31,8 +31,8 @@ window.addEventListener('DOMContentLoaded', () => {
         if (target && target.classList.contains('tabheader__item')) {
             tabs.forEach((item, i) => {
                 if (target == item) {
-                     hideTabContent();
-                     showTabContent(i);
+                    hideTabContent();
+                    showTabContent(i);
                 }
             });
         }
@@ -101,23 +101,23 @@ window.addEventListener('DOMContentLoaded', () => {
     // Modal
 
     const modalTrigger = document.querySelectorAll('[data-modal]'),
-          modal = document.querySelector('.modal');
+        modal = document.querySelector('.modal');
     
     function openModal() {
-            modal.classList.add('show');
-            modal.classList.remove('hide');
-            document.body.style.overflow = 'hidden';// Щоб не скролилась сторінка
-            // clearInterval(modalTimerId);
-        }
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        document.body.style.overflow = 'hidden';// Щоб не скролилась сторінка
+        // clearInterval(modalTimerId);
+    }
     
     modalTrigger.forEach(btn => {
-            btn.addEventListener('click', openModal);
-        });
+        btn.addEventListener('click', openModal);
+    });
     function closeModal() {
-            modal.classList.add('hide');
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-        }
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
     
     // Щоб вікно закривалось якшо клацати мимо нього
     modal.addEventListener('click', (e) => {
@@ -135,9 +135,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //Якщо доскролити сторінку до кінця відкриється вікно
     function showModalByScroll() {
-          if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-              openModal();
-              window.removeEventListener('scroll', showModalByScroll);
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
         }
     }
     window.addEventListener('scroll', showModalByScroll);
@@ -161,7 +161,7 @@ window.addEventListener('DOMContentLoaded', () => {
             this.price = this.price * this.transfer;
         }
 
-        render() {         
+        render() {
             const element = document.createElement('div');
             
             if (this.classes.length === 0) {
@@ -186,7 +186,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const getResource = async (url, ) => {
+    const getResource = async (url,) => {
         const res = await fetch(url);
         
         if (!res.ok) {
@@ -196,11 +196,11 @@ window.addEventListener('DOMContentLoaded', () => {
         return await res.json();
     };
     getResource('http://localhost:3000/menu')
-      .then(data => {
-        data.forEach(({img, altimg, title, descr, price}) => {
-            new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+        .then(data => {
+            data.forEach(({ img, altimg, title, descr, price }) => {
+                new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+            });
         });
-    });
 
     // new MenuCard(
     //     "img/tabs/vegy.jpg",
@@ -247,11 +247,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const postData = async (url, data) => {
         const res = await fetch(url, {
-              method: "POST",
-              headers: {
-                     'Cotent-type': 'application/json'
-                },
-              body: data
+            method: "POST",
+            headers: {
+                'Cotent-type': 'application/json'
+            },
+            body: data
         });
         return await res.json();
     };
@@ -282,16 +282,16 @@ window.addEventListener('DOMContentLoaded', () => {
             //     body: formData
             // })
             postData('http://localhost:3000/requests', json)
-            // .then(data => data.text())
-            .then(data => {
-                console.log(data);
-                showThanksModal(message.success);              
-                statusMessage.remove();
-            }).catch(() => {
-                showThanksModal(message.failure);
-            }).finally(() => {
-                form.reset();
-            });
+                // .then(data => data.text())
+                .then(data => {
+                    console.log(data);
+                    showThanksModal(message.success);
+                    statusMessage.remove();
+                }).catch(() => {
+                    showThanksModal(message.failure);
+                }).finally(() => {
+                    form.reset();
+                });
 
             // const object = {};
             // formData.forEach(function (value, key) {
@@ -331,27 +331,27 @@ window.addEventListener('DOMContentLoaded', () => {
         .then(res => console.log(res));
     
     
-// SLIDER
+    // SLIDER
 
     const slides = document.querySelectorAll('.offer__slide'),
-          slider = document.querySelector('.offer__slider'),
-          prev = document.querySelector('.offer__slider-prev'),
-          next = document.querySelector('.offer__slider-next'),
-          total = document.querySelector('#total'),
-          current = document.querySelector('#current'),
-          slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-          slidesField = document.querySelector('.offer__slider-inner'),
-          width = window.getComputedStyle(slidesWrapper).width;
+        slider = document.querySelector('.offer__slider'),
+        prev = document.querySelector('.offer__slider-prev'),
+        next = document.querySelector('.offer__slider-next'),
+        total = document.querySelector('#total'),
+        current = document.querySelector('#current'),
+        slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+        slidesField = document.querySelector('.offer__slider-inner'),
+        width = window.getComputedStyle(slidesWrapper).width;
     
     let slideIndex = 1;
     let offset = 0;
 
-     if (slides.length < 10) {
-         total.textContent = `0${slides.length}`;
-         current.textContent = `0${slideIndex}`;
+    if (slides.length < 10) {
+        total.textContent = `0${slides.length}`;
+        current.textContent = `0${slideIndex}`;
     } else {
-         total.textContent = slides.length;
-         current.textContent = slideIndex;
+        total.textContent = slides.length;
+        current.textContent = slideIndex;
     }
 
     slidesField.style.width = 100 * slides.length + '%';
@@ -367,10 +367,10 @@ window.addEventListener('DOMContentLoaded', () => {
     slider.style.position = 'relative';
 
     const indicators = document.createElement('ol'),
-          dots = [];
+        dots = [];
     
-        indicators.classList.add('carousel-indicators');
-        indicators.style.cssText = `
+    indicators.classList.add('carousel-indicators');
+    indicators.style.cssText = `
             position: absolute;
             right: 0;
             bottom: 0;
@@ -382,7 +382,7 @@ window.addEventListener('DOMContentLoaded', () => {
             margin-left: 15%;
             list-style: none;
         `;
-        slider.append(indicators);
+    slider.append(indicators);
 
     for (let i = 0; i < slides.length; i++) {
         const dot = document.createElement('li');
@@ -409,11 +409,15 @@ window.addEventListener('DOMContentLoaded', () => {
         dots.push(dot);
     }
 
+    function deleteNoteDigits(str) {
+        return +str.replace(/\D/g, '');
+    }
+
     next.addEventListener('click', () => {
-        if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+        if (offset == deleteNoteDigits(width) * (slides.length - 1)) {
             offset = 0;
         } else {
-            offset += +width.slice(0, width.length - 2);
+            offset += deleteNoteDigits(width);
         }
 
         slidesField.style.transform = `translateX(-${offset}px)`;
@@ -434,46 +438,46 @@ window.addEventListener('DOMContentLoaded', () => {
         dots[slideIndex - 1].style.opacity = 1;
     });
 
-     prev.addEventListener('click', () => {
+    prev.addEventListener('click', () => {
         if (offset == 0) {
-             offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+            offset = deleteNoteDigits(width) * (slides.length - 1);
         } else {
-            offset -= +width.slice(0, width.length - 2);
+            offset -= deleteNoteDigits(width);
         }
 
-         slidesField.style.transform = `translateX(-${offset}px)`;
+        slidesField.style.transform = `translateX(-${offset}px)`;
          
         if (slideIndex == 1) {
             slideIndex = slides.length;
-         } else {
+        } else {
             slideIndex--;
         }
         if (slides.length < 10) {
             current.textContent = `0${slideIndex}`;
         } else {
             current.textContent = slideIndex;
-         }
-          dots.forEach(dot => dot.style.opacity = '.5');
-          dots[slideIndex - 1].style.opacity = 1;
+        }
+        dots.forEach(dot => dot.style.opacity = '.5');
+        dots[slideIndex - 1].style.opacity = 1;
     });
 
     dots.forEach(dot => {
         dot.addEventListener('click', (e) => {
-            const slideTo = e.target.getAttribute('data-slide-to');   
+            const slideTo = e.target.getAttribute('data-slide-to');
             
             slideIndex = slideTo;
-            offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+            offset = deleteNoteDigits(width) * (slideTo - 1);
 
             slidesField.style.transform = `translateX(-${offset}px)`;
 
             if (slides.length < 10) {
-            current.textContent = `0${slideIndex}`;
-                } else {
-            current.textContent = slideIndex;
-             }
+                current.textContent = `0${slideIndex}`;
+            } else {
+                current.textContent = slideIndex;
+            }
 
             dots.forEach(dot => dot.style.opacity = '.5');
-            dots[slideIndex - 1].style.opacity = 1;  
+            dots[slideIndex - 1].style.opacity = 1;
         });
     });
     // showSlides(slideIndex);
@@ -513,5 +517,79 @@ window.addEventListener('DOMContentLoaded', () => {
     // next.addEventListener('click', () => {
     //     plusSlides(1);
     // });
+
+    // Calc
+
+    const result = document.querySelector(".calculating__result span");
+    let sex = 'female',
+        height, weight, age,
+        ratio = 1.375;
+
+    function calcTotal() {
+        if (!sex || !height || !weight || !age || !ratio) {
+            result.textContent = '____';
+            return;
+        }
+
+        if (sex === 'female') {
+            result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
+        } else {
+            result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
+        }
+    }
+
+    calcTotal();
+
+    function getStaticIformation(parentSelector, activeClass) {
+        const elemets = document.querySelectorAll(`${parentSelector} div`);
+
+        elemets.forEach(elem => {
+            elem.addEventListener('click', (e) => {
+                if (e.target.getAttribute('data-ratio')) {
+                    ratio = +e.target.getAttribute('data-ratio');
+                } else {
+                    sex = e.target.getAttribute('id');
+                }
+
+                elemets.forEach(elem => {
+                    elem.classList.remove(activeClass);
+                });
+
+                e.target.classList.add(activeClass);
+                calcTotal();
+            });
+        });
+    }
+    getStaticIformation('#gender', 'calculating__choose-item_active');
+    getStaticIformation('.calculating__choose_big', 'calculating__choose-item_active');
+
+    function getDynamicInformation(selector) {
+        const input = document.querySelector(selector);
+
+        input.addEventListener('input', () => {
+            switch (input.getAttribute('id')) {
+                case 'height':
+                    height = +input.value;
+                    break;
+                case 'weight':
+                    weight = +input.value;
+                    break;
+                case 'age':
+                    age = +input.value;
+                    break;
+            }
+
+            calcTotal(0);
+        });
+    }
+
+        getDynamicInformation('#height');
+        getDynamicInformation('#weight');
+        getDynamicInformation('#age');
+    
+
+
+
+
 });
 
